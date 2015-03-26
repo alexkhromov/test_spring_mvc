@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+    <definition name="listOfPages" extends="default">
+        <put-attribute name="body" value="/WEB-INF/pages/listOfPages.jsp"/>
+    </definition>
+
+    <definition name="pageDetail" extends="default">
+        <put-attribute name="body" value="/WEB-INF/pages/pageDetail.jsp"/>
+    </definition>
+
+</tiles-definitions>

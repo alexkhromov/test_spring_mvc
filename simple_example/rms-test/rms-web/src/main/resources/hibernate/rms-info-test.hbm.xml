@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="${env.RMS_TEST_ORACLE_DEFAULT_SCHEMA}" package="by.academy.rms.pojos">
+
+    <class name="by.academy.rms.pojos.LanguageCode" table="T_LANG_CODE" lazy="false">
+
+        <id name="id" column="F_ID">
+            <generator class="native">
+                <param name="sequence">T_LANG_CODE_SEQ</param>
+            </generator>
+        </id>
+
+        <property name="language" column="F_LANG"/>
+        <property name="countryCode" column="F_COUNTRY_CODE"/>
+        <property name="langCode" column="F_LANG_CODE"/>
+
+        <set name="pagePropertyValues" table="T_PAGE_PROPERTY_VALUE" inverse="true" fetch="select">
+            <key column="F_LANG_ID" not-null="true"/>
+            <one-to-many class="by.academy.rms.pojos.PagePropertyValue"/>
+        </set>
+
+        <set name="properties" table="T_PROPERTY" inverse="true" fetch="select">
+            <key column="F_DEFAULT_LANG_ID" not-null="true"/>
+            <one-to-many class="by.academy.rms.pojos.Property"/>
+        </set>
+
+    </class>
+
+    <!--======================================================================================================-->
+
+    <class name="PagePropertyValue" table="T_PAGE_PROPERTY_VALUE" lazy="false">
+
+        <composite-id>
+
+            <key-many-to-one name="languageCode"
+                             class="by.academy.rms.pojos.LanguageCode" column="F_LANG_ID" ></key-many-to-one>
+
+            <key-many-to-one name="pageProperty"
+                             class="by.academy.rms.pojos.PageProperty" column="F_PAGE_PROPERTY_ID"></key-many-to-one>
+
+        </composite-id>
+
+        <property name="value" column="F_VALUE"/>
+
+    </class>
+
+    <!--======================================================================================================-->
+
+    <class name="Property" table="T_PROPERTY" lazy="false">
+
+        <id name="id" column="F_ID">
+            <generator class="native">
+                <param name="sequence">T_PROPERTY_SEQ</param>
+            </generator>
+        </id>
+
+        <property name="name" column="F_NAME"/>
+        <property name="defaultValue" column="F_DEFAULT_VALUE"/>
+
+        <many-to-one name="languageCode"
+                     class="by.academy.rms.pojos.LanguageCode"
+                     fetch="select" column="F_DEFAULT_LANG_ID"></many-to-one>
+
+        <set name="pageProperties" table="T_PAGE_PROPERTY" inverse="true" fetch="select">
+            <key column="F_PROPERTY_ID" not-null="true"/>
+            <one-to-many class="by.academy.rms.pojos.PageProperty"/>
+        </set>
+
+    </class>
+
+    <!--======================================================================================================-->
+
+    <class name="PageProperty" table="T_PAGE_PROPERTY" lazy="false">
+
+        <id name="id" column="F_ID">
+            <generator class="native">
+                <param name="sequence">T_PAGE_PROPERTY_SEQ</param>
+            </generator>
+        </id>
+
+        <set name="pagePropertyValues" table="T_PAGE_PROPERTY_VALUE" inverse="true" lazy="false" fetch="select">
+            <key column="F_PAGE_PROPERTY_ID" not-null="true"/>
+            <composite-element class="by.academy.rms.pojos.PagePropertyValue">
+
+                <property name="value" column="F_VALUE"/>
+
+                <many-to-one name="languageCode"
+                             class="by.academy.rms.pojos.LanguageCode"
+                             fetch="select" column="F_LANG_ID"></many-to-one>
+
+                <!--many-to-one name="pageProperty"
+                             class="by.academy.rms.pojos.PageProperty"
+                             fetch="select" column="F_PAGE_PROPERTY_ID"></many-to-one-->
+
+            </composite-element>
+        </set>
+
+        <many-to-one name="property"
+                     class="by.academy.rms.pojos.Property"
+                     fetch="select" column="F_PROPERTY_ID"></many-to-one>
+
+        <many-to-one name="page"
+                     class="by.academy.rms.pojos.Page"
+                     fetch="select" column="F_PAGE_ID"></many-to-one>
+
+    </class>
+
+    <!--======================================================================================================-->
+
+    <class name="Page" table="T_PAGE">
+
+        <id name="id" column="F_ID">
+            <generator class="native">
+                <param name="sequence">T_PAGE_SEQ</param>
+            </generator>
+        </id>
+
+        <property name="name" column="F_NAME"/>
+        <property name="description" column="F_DESC"/>
+        <property name="changeDate" column="F_DATE_CHANGE"/>
+
+        <set name="pageProperties" table="T_PAGE_PROPERTY" inverse="true" lazy="false" fetch="select">
+            <key column="F_PAGE_ID" not-null="true"/>
+            <one-to-many class="by.academy.rms.pojos.PageProperty"/>
+        </set>
+
+    </class>
+
+</hibernate-mapping>
