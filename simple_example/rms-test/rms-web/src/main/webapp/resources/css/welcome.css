@@ -1,41 +1,93 @@
-p {
-    font: bold 18px/24px "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    border-radius: 0px !important;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-table {
-    width: 100%;
-    text-transform: uppercase;
-    border-spacing:10px 50px;
-}
-
-ul#nav {
-    list-style: none;
+body {
     margin: 0;
     padding: 0;
 }
 
-ul#nav li {
-    width: 500px;
-    text-align: center;
-    margin-left:auto;
-    margin-right:auto;
+ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-ul#nav li a, p {
+div#container {
+    margin: auto;
+    padding-top: 20px;
+    color: #444;
+    text-align: center;
+}
+
+div#header {
+    font: bold 18px/24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    height: 40px;
+    line-height: 40px;
+}
+
+div#start {
+    width: 500px;
+    text-transform: uppercase;
+    padding-top: 50px;
+    margin: auto;
+}
+
+div#start li a {
     font: bold 12px/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #444;
     text-decoration:none;
-    padding: 10px;
-    display:block;
+    height: 35px;
+    line-height: 35px;
+    display: block;
     border-radius: 100px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #BABABA #BABABA #BABABA #BABABA;
-    box-shadow: 0 1px rgba(255,255,255,1) inset;
-    -webkit-box-shadow: 0 1px rgba(255,255,255,1) inset;
+}
+
+div#navigation{
+    margin: auto;
+    display: table;
+    padding-top: 50px;
+    padding-bottom: 75px;;
+}
+
+div#navigation ul li {
+    width: 125px;
+    float: left;
+    border-left-color: #FFF;
+}
+
+div#navigation ul li a {
+    font: bold 12px/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #444;
+    text-decoration: none;
+    height: 35px;
+    line-height: 35px;
+    display:block;
+    text-transform: uppercase;
+}
+
+.tableCommon {
+    display: table;
+    width: 850px;
+    text-transform: uppercase;
+    font: bold 12px/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: auto;
+}
+
+.rowHeader, .rowRegular {
+    display: table-row;
+}
+
+div.tableCommon > div.rowHeader > div {
+    font: bold 20px/26px "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+div.tableCommon > div.rowHeader > div,
+div.tableCommon > div.rowRegular > div {
+    display: table-cell;
+}
+div#header, div#start li a,
+div#navigation ul li,
+div.tableCommon > div.rowHeader > div,
+div.tableCommon > div.rowRegular > div {
+    border: 1px solid #BABABA;
     background: #F7F7F7; /* Old browsers */
     background: -moz-linear-gradient(top, #F7F7F7 0%, #EDEDED 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F7F7F7), color-stop(100%,#EDEDED)); /* Chrome,Safari4+ */
@@ -46,10 +98,12 @@ ul#nav li a, p {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F7F7F7', endColorstr='#EDEDED',GradientType=0 ); /* IE6-9 */
 }
 
-ul#nav li a:hover {
+div#start li a:hover {
+    color: #FFF;
     border-radius: 100px;
-    box-shadow: 0 1px rgba(255,255,255,0.2) inset;
-    -webkit-box-shadow: 0 1px rgba(255,255,255,0.2) inset;
+}
+
+div#start li a:hover, div#navigation ul li:hover, div#navigation ul li.current {
     border-color: #262626 !important;
     background: #4D4D4D; /* Old browsers */
     background: -moz-linear-gradient(top, #4D4D4D 0%, #262626 100%); /* FF3.6+ */
@@ -59,6 +113,18 @@ ul#nav li a:hover {
     background: -ms-linear-gradient(top, #4D4D4D 0%,#262626 100%); /* IE10+ */
     background: linear-gradient(top, #4D4D4D 0%,#262626 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4D4D4D', endColorstr='#262626',GradientType=0 ); /* IE6-9 */
+}
+
+div#navigation ul li a:hover,
+div#navigation ul li.current a {
     color: #FFF;
-    text-shadow: 0 1px #000;
+}
+
+div#navigation ul li:first-child {
+    border-left-color: #BABABA;
+    border-radius: 100px 0 0 100px;
+}
+
+div#navigation ul li:last-child {
+    border-radius: 0 100px 100px 0;
 }

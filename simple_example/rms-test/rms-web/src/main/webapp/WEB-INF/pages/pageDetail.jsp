@@ -4,83 +4,80 @@
 <html>
 
 <head>
-    <title>Page Detail</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/listOfPages.css" />" />
 </head>
 
 <body>
-<table>
-    <tr>
-        <table class="header">
-            <tr>
-                <td>
-                    <div>
-                        <nav id="navigation">
-                            <ul>
-                                <c:forEach var="i" begin="1" end="${pages}">
 
-                                    <li><a href="pageDetail.html?id=<c:out value="${i}"/>">
-                                        Page<c:out value="${i}"/>
-                                    </a></li>
+<div id="navigation">
+    <ul>
+        <c:forEach var="i" begin="1" end="${pages}">
 
-                                </c:forEach>
-                            </ul>
-                        </nav>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </tr>
+            <li><a href="pageDetail.html?id=<c:out value="${i}"/>">
+                Page<c:out value="${i}"/>
+            </a></li>
 
-    <tr>
-        <div id="container">
-            <table class="body" border="3">
+        </c:forEach>
+    </ul>
+</div>
 
-                <tr class="rowheader">
-                    <td>Page Id</td>
-                    <td>Name</td>
-                    <td>Description</td>
-                    <td colspan="2">Date Change</td>
-                </tr>
+<div class="tableCommon">
 
-                <tr>
-                    <td><c:out value="${page.id}"/></td>
-                    <td><c:out value="${page.name}"/></td>
-                    <td><c:out value="${page.description}"/></td>
-                    <td colspan="2"><c:out value="${page.changeDate}"/></td>
-                </tr>
+    <div class="rowHeader">
+        <div>Page Id</div>
+        <div>Name</div>
+        <div>Description</div>
+        <div>Date Change</div>
+    </div>
 
-                <tr class="rowheader">
-                    <td colspan="5">Page Properties</td>
-                </tr>
+    <div class="rowRegular">
+        <div><c:out value="${page.id}"/></div>
+        <div><c:out value="${page.name}"/></div>
+        <div><c:out value="${page.description}"/></div>
+        <div><c:out value="${page.changeDate}"/></div>
+    </div>
 
-                <c:forEach var="pageProperty" items="${page.pageProperties}">
+</div>
 
-                    <tr>
-                        <td colspan="5">PageProperty<c:out value="${pageProperty.id}"/></td>
-                    </tr>
-                    <tr>
-                        <td>Name</td>
-                        <td>Default Value</td>
-                        <td>Language Code</td>
-                        <td>Country Code</td>
-                        <td>Page Property Value</td>
-                    </tr>
-                    <tr>
-                        <td><c:out value="${pageProperty.property.name}"/></td>
-                        <td><c:out value="${pageProperty.property.defaultValue}"/></td>
-                        <td><c:out value="${pageProperty.property.languageCode.language}"/></td>
-                        <td><c:out value="${pageProperty.property.languageCode.countryCode}"/></td>
-                        <c:forEach var="propertyValues" items="${pageProperty.pagePropertyValues}">
-                            <td><c:out value="${propertyValues.value}"/></td>
-                        </c:forEach>
-                    </tr>
+<div class="tableCommon">
+    <div class="rowHeader">
+        <div>Page Properties</div>
+    </div>
+</div>
 
-                </c:forEach>
 
-            </table>
+<c:forEach var="pageProperty" items="${page.pageProperties}">
+
+    <div class="tableCommon">
+        <div class="rowRegular">
+            <div style="padding-top: 3px; padding-bottom: 3px;">PageProperty<c:out value="${pageProperty.id}"/></div>
         </div>
-    </tr>
-</table>
+    </div>
+
+    <div class="tableCommon">
+
+        <div class="rowRegular">
+            <div style="width: 160px">Name</div>
+            <div style="width: 160px">Default Value</div>
+            <div style="width: 160px">Language Code</div>
+            <div style="width: 160px">Country Code</div>
+            <div style="width: 210px">Page Property Value</div>
+        </div>
+
+        <div class="rowRegular">
+            <div style="width: 160px"><c:out value="${pageProperty.property.name}"/></div>
+            <div style="width: 160px"><c:out value="${pageProperty.property.defaultValue}"/></div>
+            <div style="width: 160px"><c:out value="${pageProperty.property.languageCode.language}"/></div>
+            <div style="width: 160px"><c:out value="${pageProperty.property.languageCode.countryCode}"/></div>
+            <div style="width: 210px">
+                <c:forEach var="propertyValues" items="${pageProperty.pagePropertyValues}">
+                    <c:out value="${propertyValues.value}"/>
+                </c:forEach>
+            </div>
+        </div>
+
+    </div>
+
+</c:forEach>
+
 </body>
 </html>
