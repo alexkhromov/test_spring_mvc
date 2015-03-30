@@ -31,26 +31,6 @@ environment: Win 8, Java 8, Oracle XE 11.2.0.2.0, Tomcat 8.0.17
 		redirectPort="8443"
 		URIEncoding="UTF-8"/>
 
--open %CATALINA_HOME%\conf\server.xml and add into
- <Realm className="org.apache.catalina.realm.LockOutRealm"></Realm> section
- next lines:
-
-    <Realm className="org.apache.catalina.realm.MemoryRealm" digest="MD5"/>
-
-	<Realm  className="org.apache.catalina.realm.JDBCRealm" digest="MD5"
-             driverName="oracle.jdbc.OracleDriver"
-	     connectionURL="jdbc:oracle:thin:@//localhost:1521/XE"
-             connectionName="test1rest" connectionPassword="test1rest"
-             userTable="USERS" userNameCol="USERNAME" userCredCol="USERPASSWORD"
-             userRoleTable="USERROLE" roleNameCol="ROLENAME"/>
-
--open %CATALINA_HOME%\conf\tomcat-users.xml and add into <tomcat-users></tomcat-users>
- section next lines:
-
-	<role rolename="digestfile"/>
-	<user username="managerScript" password="Babc123" roles="manager-script"/>
-	<user username="digest2" password="b0b122bd869878f34a2a85877c429dd8" roles="digestfile"/>
-
 -for Tomcat 6 or below open person\pom.xml and change line:
 	
 	<url>http://localhost:8085/manager/text</url>
@@ -93,17 +73,18 @@ environment: Win 8, Java 8, Oracle XE 11.2.0.2.0, Tomcat 8.0.17
 
 
 ****SETUP PROJECT*****************************************************************
--database configuration in person\web\src\main\resources\spring\Database.xml 
+-database configuration in rms-test\rms-web\pom.xml ( section properties )
+-tomcat server configuration in rms-test\pom.xml ( section properties )
 **********************************************************************************
 
 
 
 ****INSTALL AND RUN PROJECT*******************************************************
--open person\install.bat  and configure next line:
+-open rms-test\install.bat  and configure next line:
 
 	sqlplus / as sysdba @%currentDirectory%\userScript.sql 
 
 	with your DBA account ( in case using different DB )
 
--run install.bat and link http://localhost:8085/person/rest/
+-run install.bat and link http://localhost:8085/spring-mvc-test
 **********************************************************************************       
