@@ -79,5 +79,11 @@
 
 </c:forEach>
 
+<div id="start">
+    <ul>
+        <li><a href="/spring-mvc-test">Start test again</a></li>
+    </ul>
+</div>
+
 </body>
 </html>
